@@ -1,8 +1,15 @@
+var numeroPokemons = document.querySelector("input[type=number]");
 
+numeroPokemons.addEventListener('keyup',(quantidade)=>{
+    Pokemons(quantidade);
+})
 
-function PegarPokemon(){
-    
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+function Pokemons(quantidade){
+    quantidade = parseInt(quantidade);
+    quantidade = 0;
+    quantidade = numeroPokemons.value;
+
+    fetch('https://pokeapi.co/api/v2/pokemon?limit='+quantidade)
     .then(response => response.json())
     .then(allpokemon => {
 
@@ -19,32 +26,14 @@ function PegarPokemon(){
                     //dadosPokemon.weight
                     //dadosPokemon.height
 
-                    dadosPokemon.types.forEach((t,v) => {
-                        
-                        dadosPokemon.slot.map((val)=>{
-
-                            pokemon.push({
-                                nome: dadosPokemon.name,
-                                imagem: dadosPokemon.sprites.front_default,
-                                altura: dadosPokemon.height,
-                                peso: dadosPokemon.weight,
-                                tipo_1: val[t].name
-                                
-                            });
-
-
-                            console.log(val.slot)
-                        })
-                    
-                        
-
+                    pokemon.push({
+                        nome: dadosPokemon.name,
+                        imagem: dadosPokemon.sprites.front_default,
+                        altura: dadosPokemon.height,
+                        peso: dadosPokemon.weight
                     });
                     
-                    
-
-                    
-
-                    if(pokemon.length == 10){
+                    if(pokemon.length == quantidade){
 
                         var todosPokemons = document.querySelector('.todos-os-pokemons');
 
@@ -54,30 +43,24 @@ function PegarPokemon(){
 
                             todosPokemons.innerHTML += `
 
-                                <div class="pokemon">
-                                    <img class="pokemon-img" src=`+val.imagem+` alt=`+val.nome+`>
-                                    <h1 class="pokemon-nome">`+val.nome+`</h1>
-                                    
-                                    <div class="dados-pokemon">
-                                        
-                                        <p class="altura-pokemon">Altura: `+val.altura/10+`m</p>
-
-                                        <p class="peso-pokemon">Peso: `+val.peso/10+`kg</p>
-
-                                        <p class="tipo-pokemon">Tipo: `+val.tipo_1+`, `+val.tipo_2+`</p>
-
-                                    </div>
+                            <div class="pokemon">
+                                <img class="pokemon-img" src=`+val.imagem+` alt=`+val.nome+`>
+                                <h1 class="pokemon-nome">`+val.nome+`</h1>
+                                <div class="dados-pokemon">
+                                    <p class="altura-pokemon">Altura: `+val.altura/10+`m</p>
+                                    <p class="peso-pokemon">Peso: `+val.peso/10+`kg</p>
                                 </div>
-                            
-                                `;
+                            </div>
+                        
+                            `;
 
                         })
+            
                     }
                 })            
         })
     })
 }
 
-PegarPokemon();
 
 

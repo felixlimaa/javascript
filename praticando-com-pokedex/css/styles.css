@@ -17,8 +17,17 @@ header{
     text-align: center;
 }
 
-header h1{
+header h1, footer p{
     color: white;
+}
+
+.quantidade_pokemons{
+    width: calc(100%/1.618);
+    margin: 9px;
+    padding: 9px;
+    text-align: center;
+    border-radius: 4px;
+    border-width: 0;
 }
 
 .todos-os-pokemons{
@@ -37,8 +46,27 @@ header h1{
     box-shadow: 8px 8px 8px rgba(25, 24, 75, 0.293);
 }
 
+@keyframes pokemon-anim{
+    0%{
+        transition: 1.75s;
+        opacity: 1;
+    }
+
+    50%{
+        width: 51.000000000001%;
+        transition: 1.75s;
+        opacity: 0.90;
+    }
+
+    100%{
+        transition: 1.75s;
+        opacity: 1;
+    }
+}
+
 .pokemon-img{
     width: 50%;
+    animation: pokemon-anim 12.75s infinite
 }
 
 .pokemon-nome{
@@ -57,4 +85,42 @@ header h1{
     padding: 12px;
     font-size: calc(26px/1.618);
     text-align: center;
+}
+
+footer{
+    width: 100%;
+    position:fixed;
+    margin-top:18px;
+    bottom: 0;
+    background-color: #19454a;
+    height: fit-content;
+    padding: 20px 0;
+    text-align: center;
+}
+
+@media screen and (max-width: 876px){
+
+    .pokemon{
+        width: calc(100%/3);
+    }
+
+    .pokemon-img{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 664px){
+    .pokemon{
+        width: calc(100%/2);
+    }
+}
+
+@media screen and (max-width: 528px){
+    .pokemon{
+        width: calc(100%/2);
+    }
+
+    .pokemon-img{
+        width: 75%;
+    }
 }
